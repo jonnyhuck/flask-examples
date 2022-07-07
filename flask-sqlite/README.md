@@ -22,7 +22,7 @@ This will create a **database** file called `test.db`, which contains a **table*
 
 
 ## References
-*This example largely based on the [Using SQLite3 with Flask tutorial](https://flask.palletsprojects.com/en/2.1.x/patterns/sqlite3/) in the Flask documentation.
-*You can learn more about the command line interface for `SQLite` [here](https://www.sqlite.org/cli.html){:target="_blank"}. 
-*A comprehensive guide the the 'flavour' of SQL that is understood by SQLite is available [here](https://www.sqlite.org/lang.html){:target="_blank"}.
-*Some slightly easier-reading examples oif using SQLite with Python are given [here](https://www.sqlitetutorial.net/sqlite-python/insert/){:target="_blank"}
+* This example largely based on the [Using SQLite3 with Flask tutorial](https://flask.palletsprojects.com/en/2.1.x/patterns/sqlite3/) in the Flask documentation.
+* You can learn more about the command line interface for `SQLite` [here](https://www.sqlite.org/cli.html){:target="_blank"}. 
+* A comprehensive guide the the 'flavour' of SQL that is understood by SQLite is available [here](https://www.sqlite.org/lang.html){:target="_blank"}.
+* Some slightly easier-reading examples oif using SQLite with Python are given [here](https://www.sqlitetutorial.net/sqlite-python/insert/){:target="_blank"}
