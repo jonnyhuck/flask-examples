@@ -35,8 +35,8 @@ In all cases, if it has worked, you should get the following response:
  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
 ```
 
-Once this happens, you should be able to find your server by typing [http://127.0.0.1:5000](http://127.0.0.1:5000){:target="_blank"} into your web browser (or clicking the link).
+Once this happens, you should be able to find your server by typing [http://127.0.0.1:5000](http://127.0.0.1:5000) into your web browser (or clicking the link).
 
 In each example directory, the server code is in `hello.py` and the HTML (web page) is stored in `templates`.
 
-More information on the basics of running Flask can be found in the Flask documentation [here](https://flask.palletsprojects.com/en/2.1.x/quickstart/){:target="_blank"}.
+More information on the basics of running Flask can be found in the Flask documentation [here](https://flask.palletsprojects.com/en/2.1.x/quickstart/).
