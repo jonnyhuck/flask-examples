@@ -2,82 +2,40 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>GIS and the Web</title>
+		<title>SQLite and Flask</title>
 
 		<!-- Load Leaflet -->
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
 		<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-
-		<style>
-
-			/* Style the map */
-			#map {
-				/* This is the dimensions of the map on the screen, you can set it in
-				 px (pixels) or % of the total screen size */
-				width:  800px;
-				height: 500px;
-			}
-
-			/* Style the table */
-			table {
-				margin-top: 10px;
-				font-family: sans-serif;
-				min-width: 800px;
-			}
-
-			/* Style the table header */
-			th {
-			  background-color: #000000;
-			  color: white;
-			  padding: 3px;
-			}
-
-			/* Style the table cells */
-			td {
-			  padding: 3px;
-			}
-
-			/* Style the table rows (only colours the even numbered rows in the table) */
-			tr:nth-child(even) {
-				background-color: #f2f2f2;
-			}
-		</style>
 	</head>
 
-	<body onload='initMap()'>
+	<body>
 
-		<!-- This is where the map will go -->
-		<div id='map'></div>
+		<!-- forms to control database actions -->
+		<h3>Insert something into the database</h3>
+		<label for="longitude">Longitude:</label><input id="insert_longitude" type="text" value="-2.807007"/>
+		<label for="latitude">Latitude:</label><input id="insert_latitude" type="text" value="54.065836"/>
+		<button onclick="makeRequest('./insert?lng=' + document.getElementById('insert_longitude').value.toString() + 
+			'&lat=' + document.getElementById('insert_latitude').value.toString(), loadInsertResponse)">Insert</button>
+		<br>
 
-		<!-- This is where the table of directions will go -->
-		<div id='directions'></div>
+		<h3>Select everything from the database</h3>
+		<button onclick="makeRequest('./selectall', loadSelectAllResponse)">Select Everything</button>
+		<br>
+
+		<h3>Select one thing from the database</h3>
+		<label for="longitude">Longitude:</label><input id="longitude" type="text"  value="-2.807007"/>
+		<label for="latitude">Latitude:</label><input id="latitude" type="text" value="54.065836"/>
+		<button onclick="makeRequest('./select?lng=' + document.getElementById('longitude').value.toString() + 
+			'&lat=' + document.getElementById('latitude').value.toString(), loadSelectOneResponse)">Query</button>
+		<br>
+
+		<hr>
+		
+		<!-- div to write outputs -->
+		<div id="db_response"></div>
 
 		<script>
-
-			//setup global variables
-			let map, start, end, routeLayer;
-
-			/**
-			 * Initialise the Map
-			 */
-			function initMap(){
-
-				// creates a world map (centre where the equator crosses the GPM)
-				map = L.map('map').setView([0, 0], 1);
-
-				// this adds the basemap tiles to the map
-				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-					attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors. Geocoding by <a href="https://nominatim.org">Nominatim</a>.Routing by <a href="https://openrouteservice.org/">OpenRouteService</a>'
-				}).addTo(map);
-
-				//construct a url YOU WOULD MAKE THIS YOURSELF BASED ON WHERE YOU WANTED TO ROUTE TO AND FROM
-				var url = "./route?from_lng=-2.807007&from_lat=54.065836&to_lng=-1.554565&to_lat=53.781181"
-
-				// send the request set callback
-				makeRequest(url, routeToMap);
-			}
-
-
 			/**
 			 * Make a request for JSON over HTTP, pass resulting text to callback when ready
 			 */
@@ -101,23 +59,41 @@
 				httpRequest.send();
 			}
 
+			/**
+			 * Parse a response and load into div
+			 */ 
+			function loadSelectAllResponse(data){
+
+				console.log(data);
+
+				// lazily load data into html and dump onto page
+				let output = "";
+				for (let i = 0; i < data.length; i++){
+					output += '<p>' + data[i].lng + ', ' + data[i].lat + '</p>';
+				}
+				document.getElementById('db_response').innerHTML = output;
+			}
 
 			/**
-			 * Retrieve a GeoJSON route and add it to the map
-			 */
-			function routeToMap(route) {
+			 * Parse a response and load into div
+			 */ 
+			function loadInsertResponse(data){
 
-				// load into L.GeoJson, style and add to the map
-				routeLayer = L.geoJson(route, {
-					style: {
-						weight: 4,
-						opacity: 1,
-						color: '#e60000',
-					}
-				}).addTo(map);
+				console.log(data);
 
-				// zoom the map to fit
-				map.fitBounds(routeLayer.getBounds());
+				// lazily load data into html and dump onto page
+				document.getElementById('db_response').innerHTML = '<p>' + data.success + '</p>';
+			}
+
+			/**
+			 * Parse a response and load into div
+			 */ 
+			function loadSelectOneResponse(data){
+
+				console.log(data);
+
+				// lazily load data into html and dump onto page
+				document.getElementById('db_response').innerHTML = '<p>' + data.lng + ', ' + data.lat + '</p>';
 			}
 		</script>
 	</body>

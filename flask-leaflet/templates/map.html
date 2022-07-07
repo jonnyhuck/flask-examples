@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>GIS and the Web</title>
+		<title>Leaflet and Flask</title>
 
 		<!-- Load Leaflet -->
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
@@ -12,34 +12,8 @@
 
 			/* Style the map */
 			#map {
-				/* This is the dimensions of the map on the screen, you can set it in
-				 px (pixels) or % of the total screen size */
 				width:  800px;
 				height: 500px;
-			}
-
-			/* Style the table */
-			table {
-				margin-top: 10px;
-				font-family: sans-serif;
-				min-width: 800px;
-			}
-
-			/* Style the table header */
-			th {
-			  background-color: #000000;
-			  color: white;
-			  padding: 3px;
-			}
-
-			/* Style the table cells */
-			td {
-			  padding: 3px;
-			}
-
-			/* Style the table rows (only colours the even numbered rows in the table) */
-			tr:nth-child(even) {
-				background-color: #f2f2f2;
 			}
 		</style>
 	</head>
@@ -48,9 +22,6 @@
 
 		<!-- This is where the map will go -->
 		<div id='map'></div>
-
-		<!-- This is where the table of directions will go -->
-		<div id='directions'></div>
 
 		<script>
 

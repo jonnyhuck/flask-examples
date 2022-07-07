@@ -25,7 +25,7 @@ set FLASK_ENV=development
 flask run
 ```
 
-In all cases, if it has worked, you should get the followong response:
+In all cases, if it has worked, you should get the following response:
 ```txt
  * Serving Flask app 'hello' (lazy loading)
  * Environment: production
